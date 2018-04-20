@@ -1,0 +1,2 @@
+brew install swagger-codegen
+swagger-codegen generate -i http://forge.local/openapi/spec.json -l typescript-angular
