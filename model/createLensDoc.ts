@@ -23,7 +23,7 @@ export interface CreateLensDoc {
     /**
      * An array of detectors
      */
-    localDetectors: Array<string>;
+    localDetectors?: Array<string>;
     /**
      * The template to be used
      */

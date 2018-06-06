@@ -9,13 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20013Items } from './inlineResponse20013Items';
 
 
-export interface InlineResponse20013 {
+export interface TagFoundDoc {
     /**
-     * The response type
+     * The type of message
+     */
+    msgType: string;
+    /**
+     * The value of the tag
+     */
+    tag?: string;
+    /**
+     * The type of tag found
      */
     type?: string;
-    items?: Array<InlineResponse20013Items>;
 }

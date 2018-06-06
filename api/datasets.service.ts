@@ -22,9 +22,13 @@ import { DatasetDoc } from '../model/datasetDoc';
 import { InlineResponse2002 } from '../model/inlineResponse2002';
 import { InlineResponse2003 } from '../model/inlineResponse2003';
 import { NewDatasetDoc } from '../model/newDatasetDoc';
+import { NewDatasetItemDoc } from '../model/newDatasetItemDoc';
 import { NewExternalDatasetDoc } from '../model/newExternalDatasetDoc';
 import { NewJobDoc } from '../model/newJobDoc';
+import { NewReferenceDatasetDoc } from '../model/newReferenceDatasetDoc';
 import { UpdateDatasetDoc } from '../model/updateDatasetDoc';
+import { UpdateExternalDatasetDoc } from '../model/updateExternalDatasetDoc';
+import { UpdateReferenceDatasetDoc } from '../model/updateReferenceDatasetDoc';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -263,6 +267,72 @@ export class DatasetsService {
     }
 
     /**
+     * Create a new reference dataset
+     * 
+     * @param accountId 
+     * @param spaceId 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public datasetsCreateReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public datasetsCreateReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public datasetsCreateReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public datasetsCreateReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling datasetsCreateReferenceDataset.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling datasetsCreateReferenceDataset.');
+        }
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling datasetsCreateReferenceDataset.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/reference`,
+            body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get information about a dataset
      * Get information about a specific dataset.
      * @param accountId 
@@ -461,13 +531,15 @@ export class DatasetsService {
      * @param spaceId 
      * @param datasetId 
      * @param csv file to upload
+     * @param countryCodes The country codes of the items, in iso-alpha-2 format. If then data items are for any country leave empty.
+     * @param languageCode The language code of the items, in iso-alpha-2 format. Defaults to &#39;en&#39;
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling datasetsImportCsvItems.');
         }
@@ -523,6 +595,12 @@ export class DatasetsService {
             formParams = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         }
 
+        if (countryCodes) {
+            formParams = formParams.append('country_codes', countryCodes.join(COLLECTION_FORMATS['csv'])) || formParams;
+        }
+        if (languageCode !== undefined) {
+            formParams = formParams.append('language_code', <any>languageCode) || formParams;
+        }
         if (csv !== undefined) {
             formParams = formParams.append('csv', <any>csv) || formParams;
         }
@@ -616,14 +694,14 @@ export class DatasetsService {
      * @param accountId 
      * @param spaceId 
      * @param datasetId 
-     * @param body null
+     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: , observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: , observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: , observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: , observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling datasetsListItemsByDataset_4.');
         }
@@ -732,6 +810,146 @@ export class DatasetsService {
         ];
 
         return this.httpClient.delete<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}/items/`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update an external dataset
+     * Update an existing external dataset.
+     * @param accountId 
+     * @param spaceId 
+     * @param datasetId 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public datasetsUpdateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public datasetsUpdateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public datasetsUpdateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public datasetsUpdateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling datasetsUpdateExternalDataset.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling datasetsUpdateExternalDataset.');
+        }
+        if (datasetId === null || datasetId === undefined) {
+            throw new Error('Required parameter datasetId was null or undefined when calling datasetsUpdateExternalDataset.');
+        }
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling datasetsUpdateExternalDataset.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/external/${encodeURIComponent(String(datasetId))}`,
+            body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update a reference dataset
+     * Update an existing reference dataset.
+     * @param accountId 
+     * @param spaceId 
+     * @param datasetId 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public datasetsUpdateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public datasetsUpdateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public datasetsUpdateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public datasetsUpdateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling datasetsUpdateReferenceDataset.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling datasetsUpdateReferenceDataset.');
+        }
+        if (datasetId === null || datasetId === undefined) {
+            throw new Error('Required parameter datasetId was null or undefined when calling datasetsUpdateReferenceDataset.');
+        }
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling datasetsUpdateReferenceDataset.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/reference/${encodeURIComponent(String(datasetId))}`,
+            body,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

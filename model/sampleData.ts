@@ -9,13 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20013Items } from './inlineResponse20013Items';
 
 
-export interface InlineResponse20013 {
+export interface SampleData {
     /**
-     * The response type
+     * A field mapped to the image_url_keys for this dataset
      */
-    type?: string;
-    items?: Array<InlineResponse20013Items>;
+    imageURL?: string;
+    /**
+     * Other field example
+     */
+    title?: string;
 }

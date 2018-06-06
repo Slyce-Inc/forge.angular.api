@@ -18,7 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { InlineResponse2006 } from '../model/inlineResponse2006';
+import { InlineResponse2007 } from '../model/inlineResponse2007';
 import { NewJobDoc } from '../model/newJobDoc';
 import { NewSpaceDoc } from '../model/newSpaceDoc';
 import { PatchSpaceDoc } from '../model/patchSpaceDoc';
@@ -69,9 +69,9 @@ export class SpacesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public spacesCreateSpace(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2006>;
-    public spacesCreateSpace(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2006>>;
-    public spacesCreateSpace(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2006>>;
+    public spacesCreateSpace(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2007>;
+    public spacesCreateSpace(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2007>>;
+    public spacesCreateSpace(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2007>>;
     public spacesCreateSpace(accountId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling spacesCreateSpace.');
@@ -113,7 +113,7 @@ export class SpacesService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<InlineResponse2006>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/`,
+        return this.httpClient.get<InlineResponse2007>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

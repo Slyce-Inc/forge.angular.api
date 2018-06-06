@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Coordinate } from './coordinate';
 
 
 export interface InlineResponse20010Items {
@@ -21,12 +20,4 @@ export interface InlineResponse20010Items {
      * The item confidence
      */
     confidence?: number;
-    /**
-     * The relative distance from the detected apparel and the anchor
-     */
-    anchorDistance?: number;
-    /**
-     * The coordinates of the match
-     */
-    coordinates?: Array<Coordinate>;
 }

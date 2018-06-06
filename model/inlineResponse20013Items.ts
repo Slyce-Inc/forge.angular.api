@@ -9,15 +9,24 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Coordinate } from './coordinate';
 
 
-export interface CreateLayerDoc {
+export interface InlineResponse20013Items {
     /**
-     * The name of the layer
+     * The item value
      */
-    layerName: string;
+    value?: string;
     /**
-     * A list of the fields used by this layer
+     * The item confidence
      */
-    layerFields?: Array<string>;
+    confidence?: number;
+    /**
+     * The relative distance from the detected logos and the anchor
+     */
+    anchorDistance?: number;
+    /**
+     * The coordinates of the match
+     */
+    coordinates?: Array<Coordinate>;
 }

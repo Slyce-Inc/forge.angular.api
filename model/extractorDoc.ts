@@ -9,13 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20013Items } from './inlineResponse20013Items';
 
 
-export interface InlineResponse20013 {
+export interface ExtractorDoc {
     /**
-     * The response type
+     * The name of the extractor
      */
-    type?: string;
-    items?: Array<InlineResponse20013Items>;
+    what: string;
+    /**
+     * Optional threshold for the extractor
+     */
+    threshold?: number;
 }

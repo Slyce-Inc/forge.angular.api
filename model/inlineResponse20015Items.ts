@@ -9,13 +9,31 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20013Items } from './inlineResponse20013Items';
 
 
-export interface InlineResponse20013 {
+export interface InlineResponse20015Items {
     /**
-     * The response type
+     * item id
      */
-    type?: string;
-    items?: Array<InlineResponse20013Items>;
+    id?: string;
+    /**
+     * item title
+     */
+    name?: string;
+    /**
+     * item description
+     */
+    description?: string;
+    /**
+     * item url
+     */
+    url?: string;
+    /**
+     * item image url
+     */
+    imageUrl?: string;
+    /**
+     * item price
+     */
+    price?: number;
 }

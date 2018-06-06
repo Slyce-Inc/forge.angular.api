@@ -9,13 +9,25 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse2007Items } from './inlineResponse2007Items';
+import { SpaceDoc } from './spaceDoc';
 
 
 export interface InlineResponse2007 {
+    items?: Array<SpaceDoc>;
     /**
-     * The response type
+     * The current page number
      */
-    type?: string;
-    items?: Array<InlineResponse2007Items>;
+    pageNumber?: number;
+    /**
+     * The number of items returned
+     */
+    pageSize?: number;
+    /**
+     * The total number of pages available
+     */
+    totalPages?: number;
+    /**
+     * The total number of items available
+     */
+    totalItems?: number;
 }

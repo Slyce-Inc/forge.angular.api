@@ -19,7 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs/Observable';
 
 import { CreateLensDoc } from '../model/createLensDoc';
-import { InlineResponse20017 } from '../model/inlineResponse20017';
+import { InlineResponse2006 } from '../model/inlineResponse2006';
 import { LensDoc } from '../model/lensDoc';
 import { NewJobDoc } from '../model/newJobDoc';
 import { UpdateLensDoc } from '../model/updateLensDoc';
@@ -262,9 +262,9 @@ export class LensesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20017>;
-    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20017>>;
-    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20017>>;
+    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2006>;
+    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2006>>;
+    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2006>>;
     public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling lensesListLenses.');
@@ -309,7 +309,7 @@ export class LensesService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<InlineResponse20017>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/lenses/`,
+        return this.httpClient.get<InlineResponse2006>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/lenses/`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

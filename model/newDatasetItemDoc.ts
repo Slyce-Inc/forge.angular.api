@@ -9,15 +9,24 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SampleData } from './sampleData';
 
 
 export interface NewDatasetItemDoc {
     /**
-     * A field mapped to the image_url_keys for this dataset
+     * The items to be imported to the dataset
      */
-    imageURL: string;
+    dataItems?: Array<SampleData>;
     /**
-     * Other field example
+     * The language code of the items, in iso-alpha-2 format. Defaults to 'en'
      */
-    title?: string;
+    languageCode?: string;
+    /**
+     * The country codes of the items, in iso-alpha-2 format. If then data items are for any country leave empty.
+     */
+    countryCodes?: Array<string>;
+    /**
+     * A flag indicating if any previously imported images associated with these data items should be reprocessed.
+     */
+    force?: boolean;
 }

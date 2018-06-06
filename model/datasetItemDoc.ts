@@ -28,12 +28,4 @@ export interface DatasetItemDoc {
      * The user that last updated the item
      */
     updatedBy?: string;
-    /**
-     * A field mapped to the image_url_keys for this dataset
-     */
-    imageURL: string;
-    /**
-     * Other field example
-     */
-    title?: string;
 }

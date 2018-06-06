@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ExtractorDoc } from './extractorDoc';
 
 
 export interface DatasetDoc {
@@ -52,4 +53,8 @@ export interface DatasetDoc {
      * The keys of the fields containing facetable data for the dataset.
      */
     facetableKeys?: Array<string>;
+    /**
+     * The extractors to run on image data during the import process
+     */
+    extract?: Array<ExtractorDoc>;
 }

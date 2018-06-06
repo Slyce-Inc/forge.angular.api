@@ -22,7 +22,7 @@ export interface InlineResponse20011Items {
      */
     confidence?: number;
     /**
-     * The relative distance from the detected barcodes and the anchor
+     * The relative distance from the detected apparel and the anchor
      */
     anchorDistance?: number;
     /**

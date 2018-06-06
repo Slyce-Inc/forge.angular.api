@@ -9,13 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20013Items } from './inlineResponse20013Items';
 
 
-export interface InlineResponse20013 {
+export interface NewReferenceDatasetDoc {
     /**
-     * The response type
+     * The type of the dataset.
      */
-    type?: string;
-    items?: Array<InlineResponse20013Items>;
+    datasetType: string;
+    /**
+     * The name of the reference dataset.
+     */
+    name: string;
+    /**
+     * The name of another dataset from which settings and items should be copied (if necessary).
+     */
+    copyFrom?: string;
 }

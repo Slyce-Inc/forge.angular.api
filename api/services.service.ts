@@ -28,7 +28,8 @@ import { InlineResponse20012 } from '../model/inlineResponse20012';
 import { InlineResponse20013 } from '../model/inlineResponse20013';
 import { InlineResponse20014 } from '../model/inlineResponse20014';
 import { InlineResponse20015 } from '../model/inlineResponse20015';
-import { InlineResponse2007 } from '../model/inlineResponse2007';
+import { InlineResponse20016 } from '../model/inlineResponse20016';
+import { InlineResponse20017 } from '../model/inlineResponse20017';
 import { InlineResponse2008 } from '../model/inlineResponse2008';
 import { InlineResponse2009 } from '../model/inlineResponse2009';
 import { VisualSearchConsumes } from '../model/visualSearchConsumes';
@@ -79,9 +80,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesClassifyColors(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2007>;
-    public servicesClassifyColors(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2007>>;
-    public servicesClassifyColors(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2007>>;
+    public servicesClassifyColors(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2008>;
+    public servicesClassifyColors(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2008>>;
+    public servicesClassifyColors(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2008>>;
     public servicesClassifyColors(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesClassifyColors.');
@@ -130,7 +131,7 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse2007>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/ClassifyColors`,
+        return this.httpClient.post<InlineResponse2008>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/ClassifyColors`,
             body,
             {
                 params: queryParameters,
@@ -152,9 +153,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesClassifyHardware(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2008>;
-    public servicesClassifyHardware(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2008>>;
-    public servicesClassifyHardware(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2008>>;
+    public servicesClassifyHardware(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2009>;
+    public servicesClassifyHardware(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2009>>;
+    public servicesClassifyHardware(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2009>>;
     public servicesClassifyHardware(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesClassifyHardware.');
@@ -203,7 +204,7 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse2008>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/ClassifyHardware`,
+        return this.httpClient.post<InlineResponse2009>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/ClassifyHardware`,
             body,
             {
                 params: queryParameters,
@@ -225,9 +226,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesClassifyPatterns(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2009>;
-    public servicesClassifyPatterns(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2009>>;
-    public servicesClassifyPatterns(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2009>>;
+    public servicesClassifyPatterns(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20010>;
+    public servicesClassifyPatterns(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20010>>;
+    public servicesClassifyPatterns(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20010>>;
     public servicesClassifyPatterns(accountId: string, spaceId: string, body: BaseClassifierConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesClassifyPatterns.');
@@ -276,7 +277,7 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse2009>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/ClassifyPatterns`,
+        return this.httpClient.post<InlineResponse20010>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/ClassifyPatterns`,
             body,
             {
                 params: queryParameters,
@@ -298,9 +299,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesDetectApparel(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20010>;
-    public servicesDetectApparel(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20010>>;
-    public servicesDetectApparel(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20010>>;
+    public servicesDetectApparel(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20011>;
+    public servicesDetectApparel(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20011>>;
+    public servicesDetectApparel(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20011>>;
     public servicesDetectApparel(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesDetectApparel.');
@@ -349,7 +350,7 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse20010>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/DetectApparel`,
+        return this.httpClient.post<InlineResponse20011>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/DetectApparel`,
             body,
             {
                 params: queryParameters,
@@ -371,9 +372,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesDetectBarcodes(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20011>;
-    public servicesDetectBarcodes(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20011>>;
-    public servicesDetectBarcodes(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20011>>;
+    public servicesDetectBarcodes(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20012>;
+    public servicesDetectBarcodes(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20012>>;
+    public servicesDetectBarcodes(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20012>>;
     public servicesDetectBarcodes(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesDetectBarcodes.');
@@ -422,7 +423,7 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse20011>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/DetectBarcodes`,
+        return this.httpClient.post<InlineResponse20012>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/DetectBarcodes`,
             body,
             {
                 params: queryParameters,
@@ -444,9 +445,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesDetectLogos(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20012>;
-    public servicesDetectLogos(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20012>>;
-    public servicesDetectLogos(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20012>>;
+    public servicesDetectLogos(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20013>;
+    public servicesDetectLogos(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20013>>;
+    public servicesDetectLogos(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20013>>;
     public servicesDetectLogos(accountId: string, spaceId: string, body: BaseDetectorConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesDetectLogos.');
@@ -495,7 +496,7 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse20012>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/DetectLogos`,
+        return this.httpClient.post<InlineResponse20013>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/DetectLogos`,
             body,
             {
                 params: queryParameters,
@@ -517,9 +518,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesDetectReferenceImages(accountId: string, spaceId: string, body: DetectReferenceImagesConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20013>;
-    public servicesDetectReferenceImages(accountId: string, spaceId: string, body: DetectReferenceImagesConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20013>>;
-    public servicesDetectReferenceImages(accountId: string, spaceId: string, body: DetectReferenceImagesConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20013>>;
+    public servicesDetectReferenceImages(accountId: string, spaceId: string, body: DetectReferenceImagesConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20014>;
+    public servicesDetectReferenceImages(accountId: string, spaceId: string, body: DetectReferenceImagesConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20014>>;
+    public servicesDetectReferenceImages(accountId: string, spaceId: string, body: DetectReferenceImagesConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20014>>;
     public servicesDetectReferenceImages(accountId: string, spaceId: string, body: DetectReferenceImagesConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesDetectReferenceImages.');
@@ -568,7 +569,7 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse20013>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/DetectReferenceImages`,
+        return this.httpClient.post<InlineResponse20014>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/DetectReferenceImages`,
             body,
             {
                 params: queryParameters,
@@ -590,9 +591,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesTextSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20014>;
-    public servicesTextSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20014>>;
-    public servicesTextSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20014>>;
+    public servicesTextSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20015>;
+    public servicesTextSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20015>>;
+    public servicesTextSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20015>>;
     public servicesTextSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesTextSearch.');
@@ -641,7 +642,7 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse20014>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/TextSearch`,
+        return this.httpClient.post<InlineResponse20015>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/TextSearch`,
             body,
             {
                 params: queryParameters,
@@ -663,9 +664,9 @@ export class ServicesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public servicesVisualSearch(accountId: string, spaceId: string, body: VisualSearchConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20015>;
-    public servicesVisualSearch(accountId: string, spaceId: string, body: VisualSearchConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20015>>;
-    public servicesVisualSearch(accountId: string, spaceId: string, body: VisualSearchConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20015>>;
+    public servicesVisualSearch(accountId: string, spaceId: string, body: VisualSearchConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20017>;
+    public servicesVisualSearch(accountId: string, spaceId: string, body: VisualSearchConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20017>>;
+    public servicesVisualSearch(accountId: string, spaceId: string, body: VisualSearchConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20017>>;
     public servicesVisualSearch(accountId: string, spaceId: string, body: VisualSearchConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling servicesVisualSearch.');
@@ -714,7 +715,80 @@ export class ServicesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<InlineResponse20015>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/VisualSearch`,
+        return this.httpClient.post<InlineResponse20017>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/VisualSearch`,
+            body,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Voyager Search
+     * voyager Search with settings
+     * @param accountId 
+     * @param spaceId 
+     * @param body 
+     * @param limit 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public servicesVoyagerSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20016>;
+    public servicesVoyagerSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20016>>;
+    public servicesVoyagerSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20016>>;
+    public servicesVoyagerSearch(accountId: string, spaceId: string, body: BaseSearchConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling servicesVoyagerSearch.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling servicesVoyagerSearch.');
+        }
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling servicesVoyagerSearch.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (limit !== undefined) {
+            queryParameters = queryParameters.set('limit', <any>limit);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<InlineResponse20016>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/VoyagerSearch`,
             body,
             {
                 params: queryParameters,

@@ -20,7 +20,7 @@ import { Observable }                                        from 'rxjs/Observab
 
 import { CreateWorkflowDoc } from '../model/createWorkflowDoc';
 import { ExecuteWorkflowDoc } from '../model/executeWorkflowDoc';
-import { InlineResponse20016 } from '../model/inlineResponse20016';
+import { InlineResponse20018 } from '../model/inlineResponse20018';
 import { NewJobDoc } from '../model/newJobDoc';
 import { UpdateWorkflowDoc } from '../model/updateWorkflowDoc';
 import { WorkflowDoc } from '../model/workflowDoc';
@@ -333,9 +333,9 @@ export class WorkflowsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20016>;
-    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20016>>;
-    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20016>>;
+    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20018>;
+    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20018>>;
+    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20018>>;
     public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling workflowsListWorkflows.');
@@ -380,7 +380,7 @@ export class WorkflowsService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<InlineResponse20016>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/`,
+        return this.httpClient.get<InlineResponse20018>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

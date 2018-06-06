@@ -123,4 +123,88 @@ export class AnalyticsService {
         );
     }
 
+    /**
+     * Postback
+     * Public endpoint where clients can provide postback information i.e. transactional data
+     * @param accountId 
+     * @param adId 
+     * @param transactionId 
+     * @param currCode 
+     * @param tax 
+     * @param shipping 
+     * @param revenue 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public analyticsPostbackAnalyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public analyticsPostbackAnalyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public analyticsPostbackAnalyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public analyticsPostbackAnalyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling analyticsPostbackAnalyticsPostback.');
+        }
+        if (adId === null || adId === undefined) {
+            throw new Error('Required parameter adId was null or undefined when calling analyticsPostbackAnalyticsPostback.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (adId !== undefined) {
+            queryParameters = queryParameters.set('ad_id', <any>adId);
+        }
+        if (transactionId !== undefined) {
+            queryParameters = queryParameters.set('transaction_id', <any>transactionId);
+        }
+        if (currCode !== undefined) {
+            queryParameters = queryParameters.set('curr_code', <any>currCode);
+        }
+        if (tax !== undefined) {
+            queryParameters = queryParameters.set('tax', <any>tax);
+        }
+        if (shipping !== undefined) {
+            queryParameters = queryParameters.set('shipping', <any>shipping);
+        }
+        if (revenue !== undefined) {
+            queryParameters = queryParameters.set('revenue', <any>revenue);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.post<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/postback/`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
 }

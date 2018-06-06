@@ -40,4 +40,12 @@ export interface WorkflowDoc {
      * The combination of operations and operators
      */
     weldStatement?: string;
+    /**
+     * The ISO 639-1 alpha-2 Code of the language to use throughout the workflow
+     */
+    languageCode?: string;
+    /**
+     * The ISO 3166-1 alpha-2 Code of the country to use throughout the workflow
+     */
+    countryCode?: string;
 }

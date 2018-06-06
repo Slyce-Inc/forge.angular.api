@@ -16,5 +16,5 @@ export interface Tag {
      * null
      */
     value?: Array<string>;
-    operator?: string;
+    confidence?: number;
 }

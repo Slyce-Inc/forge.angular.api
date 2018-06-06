@@ -56,22 +56,24 @@ export class SDKService {
 
 
     /**
-     * Get the config for the Mobile SDK
-     * 
+     * Get the config for the Mobile SDK.
+     * Get the config for the Mobile SDK based on the API key.
      * @param accountId 
-     * @param spaceId 
+     * @param spaceId An optional space_id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sDKGetSdkConfig(accountId: string, spaceId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public sDKGetSdkConfig(accountId: string, spaceId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public sDKGetSdkConfig(accountId: string, spaceId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public sDKGetSdkConfig(accountId: string, spaceId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public sDKGetSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public sDKGetSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public sDKGetSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public sDKGetSdkConfigWithApiKey(accountId: string, spaceId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling sDKGetSdkConfig.');
+            throw new Error('Required parameter accountId was null or undefined when calling sDKGetSdkConfigWithApiKey.');
         }
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling sDKGetSdkConfig.');
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (spaceId !== undefined) {
+            queryParameters = queryParameters.set('space_id', <any>spaceId);
         }
 
         let headers = this.defaultHeaders;
@@ -102,7 +104,65 @@ export class SDKService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/sdk/config/`,
+        return this.httpClient.get<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/sdk/config`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get the config for the Mobile SDK for a space.
+     * Get the config for the Mobile SDK for a provided space.
+     * @param accountId 
+     * @param spaceId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public sDKGetSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public sDKGetSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public sDKGetSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public sDKGetSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling sDKGetSdkConfigWithExplicitSpace.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling sDKGetSdkConfigWithExplicitSpace.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.get<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/sdk/config`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

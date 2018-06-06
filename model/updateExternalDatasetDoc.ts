@@ -11,15 +11,15 @@
  */
 
 
-export interface NewExternalDatasetDoc {
+export interface UpdateExternalDatasetDoc {
     /**
-     * The name of the dataset.
+     * The name of the external dataset.
      */
-    name: string;
+    name?: string;
     /**
      * The base url for the dataset
      */
-    baseUrl: string;
+    baseUrl?: string;
     /**
      * The request parameters
      */

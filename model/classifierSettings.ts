@@ -9,14 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ClassModel } from './classModel';
 
 
 export interface ClassifierSettings {
     /**
-     * A list of classes to return if precent
+     * null
      */
-    classes?: Array<ClassModel>;
+    classes?: Array<string>;
     /**
      * The minimum confidence for a class to be returned
      */

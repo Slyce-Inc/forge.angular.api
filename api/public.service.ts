@@ -24,7 +24,7 @@ import { Configuration }                                     from '../configurat
 
 
 @Injectable()
-export class ImagesService {
+export class PublicService {
 
     protected basePath = 'http://localhostnull';
     public defaultHeaders = new HttpHeaders();
@@ -56,23 +56,15 @@ export class ImagesService {
 
 
     /**
-     * View a user-generated image.
      * 
-     * @param accountId 
-     * @param imageId 
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public imagesGetUgcImage(accountId: string, imageId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public imagesGetUgcImage(accountId: string, imageId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public imagesGetUgcImage(accountId: string, imageId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public imagesGetUgcImage(accountId: string, imageId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling imagesGetUgcImage.');
-        }
-        if (imageId === null || imageId === undefined) {
-            throw new Error('Required parameter imageId was null or undefined when calling imagesGetUgcImage.');
-        }
+    public apiKeysMine(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiKeysMine(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiKeysMine(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public apiKeysMine(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -102,7 +94,7 @@ export class ImagesService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/images/ugc/${encodeURIComponent(String(imageId))}`,
+        return this.httpClient.get<any>(`${this.basePath}/api_keys/mine`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -113,27 +105,15 @@ export class ImagesService {
     }
 
     /**
-     * View a user-generated image.
      * 
-     * @param accountId 
-     * @param fingerprint 
-     * @param imageId 
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public imagesGetUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public imagesGetUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public imagesGetUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public imagesGetUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling imagesGetUgcImageWithFingerprint.');
-        }
-        if (fingerprint === null || fingerprint === undefined) {
-            throw new Error('Required parameter fingerprint was null or undefined when calling imagesGetUgcImageWithFingerprint.');
-        }
-        if (imageId === null || imageId === undefined) {
-            throw new Error('Required parameter imageId was null or undefined when calling imagesGetUgcImageWithFingerprint.');
-        }
+    public validateWeld(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public validateWeld(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public validateWeld(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public validateWeld(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -163,7 +143,57 @@ export class ImagesService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/images/ugc/${encodeURIComponent(String(fingerprint))}/${encodeURIComponent(String(imageId))}`,
+        return this.httpClient.post<any>(`${this.basePath}/validate_weld`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public weldHighlighter(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public weldHighlighter(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public weldHighlighter(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public weldHighlighter(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.get<any>(`${this.basePath}/weld_highlighter`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

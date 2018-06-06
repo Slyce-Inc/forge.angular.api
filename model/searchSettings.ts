@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Facet } from './facet';
 
 
 export interface SearchSettings {
@@ -20,5 +21,8 @@ export interface SearchSettings {
      * null
      */
     searchTerms?: Array<string>;
-    facets?: any;
+    /**
+     * null
+     */
+    facets?: Array<Facet>;
 }

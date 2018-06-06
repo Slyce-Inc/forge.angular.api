@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20014Items } from './inlineResponse20014Items';
+import { InlineResponse20015Items } from './inlineResponse20015Items';
 
 
 export interface InlineResponse20015 {
@@ -17,7 +17,7 @@ export interface InlineResponse20015 {
      * The response type
      */
     type?: string;
-    items?: Array<InlineResponse20014Items>;
+    items?: Array<InlineResponse20015Items>;
     /**
      * The total number of items available
      */

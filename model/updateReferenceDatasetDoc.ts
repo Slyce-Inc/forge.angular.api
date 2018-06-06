@@ -9,13 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20013Items } from './inlineResponse20013Items';
 
 
-export interface InlineResponse20013 {
+export interface UpdateReferenceDatasetDoc {
     /**
-     * The response type
+     * The reference name of the dataset
      */
-    type?: string;
-    items?: Array<InlineResponse20013Items>;
+    name?: string;
 }

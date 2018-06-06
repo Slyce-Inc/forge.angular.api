@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20014Items } from './inlineResponse20014Items';
+import { ReferenceImageData } from './referenceImageData';
 
 
 export interface InlineResponse20014 {
@@ -17,13 +17,8 @@ export interface InlineResponse20014 {
      * The response type
      */
     type?: string;
-    items?: Array<InlineResponse20014Items>;
     /**
-     * The total number of items available
+     * The data returned by the operation
      */
-    totalItems?: number;
-    /**
-     * The cursor for paging the items
-     */
-    cursor?: string;
+    data?: ReferenceImageData;
 }

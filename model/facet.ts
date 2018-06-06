@@ -9,13 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20013Items } from './inlineResponse20013Items';
 
 
-export interface InlineResponse20013 {
+export interface Facet {
     /**
-     * The response type
+     * A facet value
      */
-    type?: string;
-    items?: Array<InlineResponse20013Items>;
+    value?: string;
+    /**
+     * A facet operator
+     */
+    operator?: string;
 }

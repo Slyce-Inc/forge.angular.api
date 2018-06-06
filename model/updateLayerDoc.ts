@@ -19,5 +19,5 @@ export interface UpdateLayerDoc {
     /**
      * A list of the fields used by this layer
      */
-    layerFields?: any;
+    layerFields?: Array<string>;
 }
