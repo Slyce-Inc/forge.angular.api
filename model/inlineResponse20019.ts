@@ -9,21 +9,25 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20015Items } from './inlineResponse20015Items';
+import { WorkflowDoc } from './workflowDoc';
 
 
-export interface InlineResponse20018 {
+export interface InlineResponse20019 {
+    items?: Array<WorkflowDoc>;
     /**
-     * The response type
+     * The current page number
      */
-    type?: string;
-    items?: Array<InlineResponse20015Items>;
+    pageNumber?: number;
+    /**
+     * The number of items returned
+     */
+    pageSize?: number;
+    /**
+     * The total number of pages available
+     */
+    totalPages?: number;
     /**
      * The total number of items available
      */
     totalItems?: number;
-    /**
-     * The cursor for paging the items
-     */
-    cursor?: string;
 }

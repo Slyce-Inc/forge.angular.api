@@ -66,18 +66,18 @@ export class AnalyticsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public analyticsAnalyticsEventTracking(accountId: string, spaceId: string, body: AnalyticsEventTrackingDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public analyticsAnalyticsEventTracking(accountId: string, spaceId: string, body: AnalyticsEventTrackingDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public analyticsAnalyticsEventTracking(accountId: string, spaceId: string, body: AnalyticsEventTrackingDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public analyticsAnalyticsEventTracking(accountId: string, spaceId: string, body: AnalyticsEventTrackingDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public analyticsEventTracking(accountId: string, spaceId: string, body: AnalyticsEventTrackingDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public analyticsEventTracking(accountId: string, spaceId: string, body: AnalyticsEventTrackingDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public analyticsEventTracking(accountId: string, spaceId: string, body: AnalyticsEventTrackingDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public analyticsEventTracking(accountId: string, spaceId: string, body: AnalyticsEventTrackingDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling analyticsAnalyticsEventTracking.');
+            throw new Error('Required parameter accountId was null or undefined when calling analyticsEventTracking.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling analyticsAnalyticsEventTracking.');
+            throw new Error('Required parameter spaceId was null or undefined when calling analyticsEventTracking.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling analyticsAnalyticsEventTracking.');
+            throw new Error('Required parameter body was null or undefined when calling analyticsEventTracking.');
         }
 
         let headers = this.defaultHeaders;
@@ -136,15 +136,15 @@ export class AnalyticsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public analyticsPostbackAnalyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public analyticsPostbackAnalyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public analyticsPostbackAnalyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public analyticsPostbackAnalyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public analyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public analyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public analyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public analyticsPostback(accountId: string, adId: string, transactionId?: string, currCode?: string, tax?: string, shipping?: string, revenue?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling analyticsPostbackAnalyticsPostback.');
+            throw new Error('Required parameter accountId was null or undefined when calling analyticsPostback.');
         }
         if (adId === null || adId === undefined) {
-            throw new Error('Required parameter adId was null or undefined when calling analyticsPostbackAnalyticsPostback.');
+            throw new Error('Required parameter adId was null or undefined when calling analyticsPostback.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});

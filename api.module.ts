@@ -7,8 +7,10 @@ import { APIKeysService } from './api/aPIKeys.service';
 import { AccountsService } from './api/accounts.service';
 import { AnalyticsService } from './api/analytics.service';
 import { DatasetsService } from './api/datasets.service';
+import { DefaultService } from './api/default.service';
 import { FingerprintService } from './api/fingerprint.service';
 import { ImagesService } from './api/images.service';
+import { InternalService } from './api/internal.service';
 import { JobsService } from './api/jobs.service';
 import { LayersService } from './api/layers.service';
 import { LensesService } from './api/lenses.service';
@@ -29,8 +31,10 @@ import { WorkflowsService } from './api/workflows.service';
     AccountsService,
     AnalyticsService,
     DatasetsService,
+    DefaultService,
     FingerprintService,
     ImagesService,
+    InternalService,
     JobsService,
     LayersService,
     LensesService,

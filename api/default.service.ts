@@ -61,10 +61,10 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiKeysMine(observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public apiKeysMine(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public apiKeysMine(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public apiKeysMine(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public workflowExecutor(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public workflowExecutor(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public workflowExecutor(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public workflowExecutor(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -94,106 +94,7 @@ export class DefaultService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<any>(`${this.basePath}/api_keys/mine`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public validateWeld(observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public validateWeld(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public validateWeld(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public validateWeld(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-
-        return this.httpClient.post<any>(`${this.basePath}/validate_weld`,
-            null,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public weldHighlighter(observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public weldHighlighter(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public weldHighlighter(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public weldHighlighter(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-
-        return this.httpClient.get<any>(`${this.basePath}/weld_highlighter`,
+        return this.httpClient.get<any>(`${this.basePath}/search`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

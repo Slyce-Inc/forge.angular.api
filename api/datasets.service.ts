@@ -67,74 +67,6 @@ export class DatasetsService {
 
 
     /**
-     * List datasets
-     * 
-     * @param accountId 
-     * @param spaceId 
-     * @param pageNumber The page number to get
-     * @param pageSize The number of items to return
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public datasetsCreateDataset(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2002>;
-    public datasetsCreateDataset(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2002>>;
-    public datasetsCreateDataset(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2002>>;
-    public datasetsCreateDataset(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsCreateDataset.');
-        }
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsCreateDataset.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (pageNumber !== undefined) {
-            queryParameters = queryParameters.set('page_number', <any>pageNumber);
-        }
-        if (pageSize !== undefined) {
-            queryParameters = queryParameters.set('page_size', <any>pageSize);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-
-        return this.httpClient.get<InlineResponse2002>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Create a new dataset
      * 
      * @param accountId 
@@ -143,18 +75,18 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsCreateDataset_1(accountId: string, spaceId: string, body: NewDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsCreateDataset_1(accountId: string, spaceId: string, body: NewDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsCreateDataset_1(accountId: string, spaceId: string, body: NewDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsCreateDataset_1(accountId: string, spaceId: string, body: NewDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createDataset(accountId: string, spaceId: string, body: NewDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public createDataset(accountId: string, spaceId: string, body: NewDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public createDataset(accountId: string, spaceId: string, body: NewDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public createDataset(accountId: string, spaceId: string, body: NewDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsCreateDataset_1.');
+            throw new Error('Required parameter accountId was null or undefined when calling createDataset.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsCreateDataset_1.');
+            throw new Error('Required parameter spaceId was null or undefined when calling createDataset.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling datasetsCreateDataset_1.');
+            throw new Error('Required parameter body was null or undefined when calling createDataset.');
         }
 
         let headers = this.defaultHeaders;
@@ -209,18 +141,18 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsCreateExternalDataset(accountId: string, spaceId: string, body: NewExternalDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsCreateExternalDataset(accountId: string, spaceId: string, body: NewExternalDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsCreateExternalDataset(accountId: string, spaceId: string, body: NewExternalDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsCreateExternalDataset(accountId: string, spaceId: string, body: NewExternalDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createExternalDataset(accountId: string, spaceId: string, body: NewExternalDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public createExternalDataset(accountId: string, spaceId: string, body: NewExternalDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public createExternalDataset(accountId: string, spaceId: string, body: NewExternalDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public createExternalDataset(accountId: string, spaceId: string, body: NewExternalDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsCreateExternalDataset.');
+            throw new Error('Required parameter accountId was null or undefined when calling createExternalDataset.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsCreateExternalDataset.');
+            throw new Error('Required parameter spaceId was null or undefined when calling createExternalDataset.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling datasetsCreateExternalDataset.');
+            throw new Error('Required parameter body was null or undefined when calling createExternalDataset.');
         }
 
         let headers = this.defaultHeaders;
@@ -275,18 +207,18 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsCreateReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsCreateReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsCreateReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsCreateReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public createReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public createReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public createReferenceDataset(accountId: string, spaceId: string, body: NewReferenceDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsCreateReferenceDataset.');
+            throw new Error('Required parameter accountId was null or undefined when calling createReferenceDataset.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsCreateReferenceDataset.');
+            throw new Error('Required parameter spaceId was null or undefined when calling createReferenceDataset.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling datasetsCreateReferenceDataset.');
+            throw new Error('Required parameter body was null or undefined when calling createReferenceDataset.');
         }
 
         let headers = this.defaultHeaders;
@@ -333,26 +265,26 @@ export class DatasetsService {
     }
 
     /**
-     * Get information about a dataset
-     * Get information about a specific dataset.
+     * Clear a dataset&#39;s items
+     * Remove all data items from a dataset.
      * @param accountId 
      * @param spaceId 
      * @param datasetId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsDeleteDataset(accountId: string, spaceId: string, datasetId: string, observe?: 'body', reportProgress?: boolean): Observable<DatasetDoc>;
-    public datasetsDeleteDataset(accountId: string, spaceId: string, datasetId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DatasetDoc>>;
-    public datasetsDeleteDataset(accountId: string, spaceId: string, datasetId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DatasetDoc>>;
-    public datasetsDeleteDataset(accountId: string, spaceId: string, datasetId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteAllDataItems(accountId: string, spaceId: string, datasetId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteAllDataItems(accountId: string, spaceId: string, datasetId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteAllDataItems(accountId: string, spaceId: string, datasetId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteAllDataItems(accountId: string, spaceId: string, datasetId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsDeleteDataset.');
+            throw new Error('Required parameter accountId was null or undefined when calling deleteAllDataItems.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsDeleteDataset.');
+            throw new Error('Required parameter spaceId was null or undefined when calling deleteAllDataItems.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsDeleteDataset.');
+            throw new Error('Required parameter datasetId was null or undefined when calling deleteAllDataItems.');
         }
 
         let headers = this.defaultHeaders;
@@ -383,7 +315,7 @@ export class DatasetsService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<DatasetDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}`,
+        return this.httpClient.delete<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}/items/`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -402,18 +334,18 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsDeleteDataset_2(accountId: string, spaceId: string, datasetId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public datasetsDeleteDataset_2(accountId: string, spaceId: string, datasetId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public datasetsDeleteDataset_2(accountId: string, spaceId: string, datasetId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public datasetsDeleteDataset_2(accountId: string, spaceId: string, datasetId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteDataset(accountId: string, spaceId: string, datasetId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteDataset(accountId: string, spaceId: string, datasetId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteDataset(accountId: string, spaceId: string, datasetId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteDataset(accountId: string, spaceId: string, datasetId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsDeleteDataset_2.');
+            throw new Error('Required parameter accountId was null or undefined when calling deleteDataset.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsDeleteDataset_2.');
+            throw new Error('Required parameter spaceId was null or undefined when calling deleteDataset.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsDeleteDataset_2.');
+            throw new Error('Required parameter datasetId was null or undefined when calling deleteDataset.');
         }
 
         let headers = this.defaultHeaders;
@@ -455,30 +387,30 @@ export class DatasetsService {
     }
 
     /**
-     * Update a dataset
-     * Update an existing dataset.
+     * Delete a data item
+     * Remove a single data item from a dataset.
      * @param accountId 
      * @param spaceId 
      * @param datasetId 
-     * @param body 
+     * @param itemId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsDeleteDataset_3(accountId: string, spaceId: string, datasetId: string, body: UpdateDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsDeleteDataset_3(accountId: string, spaceId: string, datasetId: string, body: UpdateDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsDeleteDataset_3(accountId: string, spaceId: string, datasetId: string, body: UpdateDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsDeleteDataset_3(accountId: string, spaceId: string, datasetId: string, body: UpdateDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteSingleDataItems(accountId: string, spaceId: string, datasetId: string, itemId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteSingleDataItems(accountId: string, spaceId: string, datasetId: string, itemId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteSingleDataItems(accountId: string, spaceId: string, datasetId: string, itemId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteSingleDataItems(accountId: string, spaceId: string, datasetId: string, itemId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsDeleteDataset_3.');
+            throw new Error('Required parameter accountId was null or undefined when calling deleteSingleDataItems.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsDeleteDataset_3.');
+            throw new Error('Required parameter spaceId was null or undefined when calling deleteSingleDataItems.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsDeleteDataset_3.');
+            throw new Error('Required parameter datasetId was null or undefined when calling deleteSingleDataItems.');
         }
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling datasetsDeleteDataset_3.');
+        if (itemId === null || itemId === undefined) {
+            throw new Error('Required parameter itemId was null or undefined when calling deleteSingleDataItems.');
         }
 
         let headers = this.defaultHeaders;
@@ -508,13 +440,69 @@ export class DatasetsService {
             'application/json',
             'multipart/form-data'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
+
+        return this.httpClient.delete<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}/items/${encodeURIComponent(String(itemId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get information about a dataset
+     * Get information about a specific dataset.
+     * @param accountId 
+     * @param spaceId 
+     * @param datasetId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getDatasetById(accountId: string, spaceId: string, datasetId: string, observe?: 'body', reportProgress?: boolean): Observable<DatasetDoc>;
+    public getDatasetById(accountId: string, spaceId: string, datasetId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DatasetDoc>>;
+    public getDatasetById(accountId: string, spaceId: string, datasetId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DatasetDoc>>;
+    public getDatasetById(accountId: string, spaceId: string, datasetId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling getDatasetById.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling getDatasetById.');
+        }
+        if (datasetId === null || datasetId === undefined) {
+            throw new Error('Required parameter datasetId was null or undefined when calling getDatasetById.');
         }
 
-        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}`,
-            body,
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.get<DatasetDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -536,21 +524,21 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsImportCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public importCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public importCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public importCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public importCsvItems(accountId: string, spaceId: string, datasetId: string, csv: Blob, countryCodes?: Array<string>, languageCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsImportCsvItems.');
+            throw new Error('Required parameter accountId was null or undefined when calling importCsvItems.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsImportCsvItems.');
+            throw new Error('Required parameter spaceId was null or undefined when calling importCsvItems.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsImportCsvItems.');
+            throw new Error('Required parameter datasetId was null or undefined when calling importCsvItems.');
         }
         if (csv === null || csv === undefined) {
-            throw new Error('Required parameter csv was null or undefined when calling datasetsImportCsvItems.');
+            throw new Error('Required parameter csv was null or undefined when calling importCsvItems.');
         }
 
         let headers = this.defaultHeaders;
@@ -617,6 +605,144 @@ export class DatasetsService {
     }
 
     /**
+     * Import Items
+     * 
+     * @param accountId 
+     * @param spaceId 
+     * @param datasetId 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public importItems(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public importItems(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public importItems(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public importItems(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling importItems.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling importItems.');
+        }
+        if (datasetId === null || datasetId === undefined) {
+            throw new Error('Required parameter datasetId was null or undefined when calling importItems.');
+        }
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling importItems.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}/items/`,
+            body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * List datasets
+     * 
+     * @param accountId 
+     * @param spaceId 
+     * @param pageNumber The page number to get
+     * @param pageSize The number of items to return
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listDatasets(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2002>;
+    public listDatasets(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2002>>;
+    public listDatasets(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2002>>;
+    public listDatasets(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling listDatasets.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling listDatasets.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (pageNumber !== undefined) {
+            queryParameters = queryParameters.set('page_number', <any>pageNumber);
+        }
+        if (pageSize !== undefined) {
+            queryParameters = queryParameters.set('page_size', <any>pageSize);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.get<InlineResponse2002>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * List items by dataset
      * 
      * @param accountId 
@@ -627,18 +753,18 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsListItemsByDataset(accountId: string, spaceId: string, datasetId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2003>;
-    public datasetsListItemsByDataset(accountId: string, spaceId: string, datasetId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2003>>;
-    public datasetsListItemsByDataset(accountId: string, spaceId: string, datasetId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2003>>;
-    public datasetsListItemsByDataset(accountId: string, spaceId: string, datasetId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listItemsByDataset(accountId: string, spaceId: string, datasetId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2003>;
+    public listItemsByDataset(accountId: string, spaceId: string, datasetId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2003>>;
+    public listItemsByDataset(accountId: string, spaceId: string, datasetId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2003>>;
+    public listItemsByDataset(accountId: string, spaceId: string, datasetId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsListItemsByDataset.');
+            throw new Error('Required parameter accountId was null or undefined when calling listItemsByDataset.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsListItemsByDataset.');
+            throw new Error('Required parameter spaceId was null or undefined when calling listItemsByDataset.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsListItemsByDataset.');
+            throw new Error('Required parameter datasetId was null or undefined when calling listItemsByDataset.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -689,8 +815,8 @@ export class DatasetsService {
     }
 
     /**
-     * Import Items
-     * 
+     * Update a dataset
+     * Update an existing dataset.
      * @param accountId 
      * @param spaceId 
      * @param datasetId 
@@ -698,21 +824,21 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsListItemsByDataset_4(accountId: string, spaceId: string, datasetId: string, body: NewDatasetItemDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public updateDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public updateDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public updateDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsListItemsByDataset_4.');
+            throw new Error('Required parameter accountId was null or undefined when calling updateDataset.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsListItemsByDataset_4.');
+            throw new Error('Required parameter spaceId was null or undefined when calling updateDataset.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsListItemsByDataset_4.');
+            throw new Error('Required parameter datasetId was null or undefined when calling updateDataset.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling datasetsListItemsByDataset_4.');
+            throw new Error('Required parameter body was null or undefined when calling updateDataset.');
         }
 
         let headers = this.defaultHeaders;
@@ -747,69 +873,8 @@ export class DatasetsService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}/items/`,
+        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}`,
             body,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Clear a dataset&#39;s items
-     * Remove all data items from a dataset.
-     * @param accountId 
-     * @param spaceId 
-     * @param datasetId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public datasetsListItemsByDataset_5(accountId: string, spaceId: string, datasetId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public datasetsListItemsByDataset_5(accountId: string, spaceId: string, datasetId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public datasetsListItemsByDataset_5(accountId: string, spaceId: string, datasetId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public datasetsListItemsByDataset_5(accountId: string, spaceId: string, datasetId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsListItemsByDataset_5.');
-        }
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsListItemsByDataset_5.');
-        }
-        if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsListItemsByDataset_5.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-
-        return this.httpClient.delete<any>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/datasets/${encodeURIComponent(String(datasetId))}/items/`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -829,21 +894,21 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsUpdateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsUpdateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsUpdateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsUpdateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public updateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public updateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public updateExternalDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateExternalDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsUpdateExternalDataset.');
+            throw new Error('Required parameter accountId was null or undefined when calling updateExternalDataset.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsUpdateExternalDataset.');
+            throw new Error('Required parameter spaceId was null or undefined when calling updateExternalDataset.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsUpdateExternalDataset.');
+            throw new Error('Required parameter datasetId was null or undefined when calling updateExternalDataset.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling datasetsUpdateExternalDataset.');
+            throw new Error('Required parameter body was null or undefined when calling updateExternalDataset.');
         }
 
         let headers = this.defaultHeaders;
@@ -899,21 +964,21 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsUpdateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsUpdateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsUpdateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsUpdateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public updateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public updateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public updateReferenceDataset(accountId: string, spaceId: string, datasetId: string, body: UpdateReferenceDatasetDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsUpdateReferenceDataset.');
+            throw new Error('Required parameter accountId was null or undefined when calling updateReferenceDataset.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsUpdateReferenceDataset.');
+            throw new Error('Required parameter spaceId was null or undefined when calling updateReferenceDataset.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling datasetsUpdateReferenceDataset.');
+            throw new Error('Required parameter datasetId was null or undefined when calling updateReferenceDataset.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling datasetsUpdateReferenceDataset.');
+            throw new Error('Required parameter body was null or undefined when calling updateReferenceDataset.');
         }
 
         let headers = this.defaultHeaders;
@@ -969,18 +1034,18 @@ export class DatasetsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public datasetsUploadLegacyCatalog(accountId: string, spaceId: string, catalogZip: Blob, datasetName?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public datasetsUploadLegacyCatalog(accountId: string, spaceId: string, catalogZip: Blob, datasetName?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public datasetsUploadLegacyCatalog(accountId: string, spaceId: string, catalogZip: Blob, datasetName?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public datasetsUploadLegacyCatalog(accountId: string, spaceId: string, catalogZip: Blob, datasetName?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public uploadLegacyCatalog(accountId: string, spaceId: string, catalogZip: Blob, datasetName?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public uploadLegacyCatalog(accountId: string, spaceId: string, catalogZip: Blob, datasetName?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public uploadLegacyCatalog(accountId: string, spaceId: string, catalogZip: Blob, datasetName?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public uploadLegacyCatalog(accountId: string, spaceId: string, catalogZip: Blob, datasetName?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling datasetsUploadLegacyCatalog.');
+            throw new Error('Required parameter accountId was null or undefined when calling uploadLegacyCatalog.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling datasetsUploadLegacyCatalog.');
+            throw new Error('Required parameter spaceId was null or undefined when calling uploadLegacyCatalog.');
         }
         if (catalogZip === null || catalogZip === undefined) {
-            throw new Error('Required parameter catalogZip was null or undefined when calling datasetsUploadLegacyCatalog.');
+            throw new Error('Required parameter catalogZip was null or undefined when calling uploadLegacyCatalog.');
         }
 
         let headers = this.defaultHeaders;

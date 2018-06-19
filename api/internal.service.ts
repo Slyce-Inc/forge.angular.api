@@ -18,15 +18,15 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { InlineResponse2004 } from '../model/inlineResponse2004';
-import { NewJobDoc } from '../model/newJobDoc';
+import { BuildIndexDoc } from '../model/buildIndexDoc';
+import { SearchIndexDoc } from '../model/searchIndexDoc';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class JobsService {
+export class InternalService {
 
     protected basePath = 'http://localhostnull';
     public defaultHeaders = new HttpHeaders();
@@ -58,22 +58,18 @@ export class JobsService {
 
 
     /**
-     * Get the status of a job
-     * Get the status of a job by its id.
-     * @param accountId 
-     * @param jobId 
+     * Build an index
+     * Build an index for a given dataset.
+     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getJob(accountId: string, jobId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public getJob(accountId: string, jobId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public getJob(accountId: string, jobId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public getJob(accountId: string, jobId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling getJob.');
-        }
-        if (jobId === null || jobId === undefined) {
-            throw new Error('Required parameter jobId was null or undefined when calling getJob.');
+    public sendBuildIndexCommand(body: BuildIndexDoc, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public sendBuildIndexCommand(body: BuildIndexDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public sendBuildIndexCommand(body: BuildIndexDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public sendBuildIndexCommand(body: BuildIndexDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling sendBuildIndexCommand.');
         }
 
         let headers = this.defaultHeaders;
@@ -103,8 +99,13 @@ export class JobsService {
             'application/json',
             'multipart/form-data'
         ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
 
-        return this.httpClient.get<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/jobs/${encodeURIComponent(String(jobId))}`,
+        return this.httpClient.post<any>(`${this.basePath}/internal/build-index`,
+            body,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -115,28 +116,18 @@ export class JobsService {
     }
 
     /**
-     * List the jobs
-     * Get a list of all jobs in the system.
-     * @param accountId 
-     * @param pageNumber The page number to get
-     * @param pageSize The number of items to return
+     * Search an index
+     * Search an index for a given dataset.
+     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listJobs(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2004>;
-    public listJobs(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2004>>;
-    public listJobs(accountId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2004>>;
-    public listJobs(accountId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling listJobs.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (pageNumber !== undefined) {
-            queryParameters = queryParameters.set('page_number', <any>pageNumber);
-        }
-        if (pageSize !== undefined) {
-            queryParameters = queryParameters.set('page_size', <any>pageSize);
+    public sendSearchIndexCommand(body: SearchIndexDoc, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public sendSearchIndexCommand(body: SearchIndexDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public sendSearchIndexCommand(body: SearchIndexDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public sendSearchIndexCommand(body: SearchIndexDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling sendSearchIndexCommand.');
         }
 
         let headers = this.defaultHeaders;
@@ -166,10 +157,14 @@ export class JobsService {
             'application/json',
             'multipart/form-data'
         ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
 
-        return this.httpClient.get<InlineResponse2004>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/jobs/`,
+        return this.httpClient.post<any>(`${this.basePath}/internal/search-index`,
+            body,
             {
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

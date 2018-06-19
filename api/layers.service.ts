@@ -62,266 +62,6 @@ export class LayersService {
 
 
     /**
-     * Get a layer
-     * 
-     * @param accountId 
-     * @param spaceId 
-     * @param layerId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public layersGetLayer(accountId: string, spaceId: string, layerId: string, observe?: 'body', reportProgress?: boolean): Observable<LayerDoc>;
-    public layersGetLayer(accountId: string, spaceId: string, layerId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<LayerDoc>>;
-    public layersGetLayer(accountId: string, spaceId: string, layerId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<LayerDoc>>;
-    public layersGetLayer(accountId: string, spaceId: string, layerId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling layersGetLayer.');
-        }
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling layersGetLayer.');
-        }
-        if (layerId === null || layerId === undefined) {
-            throw new Error('Required parameter layerId was null or undefined when calling layersGetLayer.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-
-        return this.httpClient.get<LayerDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/layers/${encodeURIComponent(String(layerId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Delete a layer in a space.
-     * 
-     * @param accountId 
-     * @param spaceId 
-     * @param layerId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public layersGetLayer_1(accountId: string, spaceId: string, layerId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public layersGetLayer_1(accountId: string, spaceId: string, layerId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public layersGetLayer_1(accountId: string, spaceId: string, layerId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public layersGetLayer_1(accountId: string, spaceId: string, layerId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling layersGetLayer_1.');
-        }
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling layersGetLayer_1.');
-        }
-        if (layerId === null || layerId === undefined) {
-            throw new Error('Required parameter layerId was null or undefined when calling layersGetLayer_1.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-
-        return this.httpClient.delete<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/layers/${encodeURIComponent(String(layerId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Update a layer.
-     * Update a layer in a space.
-     * @param accountId 
-     * @param spaceId 
-     * @param layerId 
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public layersGetLayer_2(accountId: string, spaceId: string, layerId: string, body: UpdateLayerDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public layersGetLayer_2(accountId: string, spaceId: string, layerId: string, body: UpdateLayerDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public layersGetLayer_2(accountId: string, spaceId: string, layerId: string, body: UpdateLayerDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public layersGetLayer_2(accountId: string, spaceId: string, layerId: string, body: UpdateLayerDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling layersGetLayer_2.');
-        }
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling layersGetLayer_2.');
-        }
-        if (layerId === null || layerId === undefined) {
-            throw new Error('Required parameter layerId was null or undefined when calling layersGetLayer_2.');
-        }
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling layersGetLayer_2.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
-        }
-
-        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/layers/${encodeURIComponent(String(layerId))}`,
-            body,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * List the layers
-     * Get a list of all layers in a space.
-     * @param accountId 
-     * @param spaceId 
-     * @param pageNumber The page number to get
-     * @param pageSize The number of items to return
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public layersListLayers(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2005>;
-    public layersListLayers(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2005>>;
-    public layersListLayers(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2005>>;
-    public layersListLayers(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling layersListLayers.');
-        }
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling layersListLayers.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (pageNumber !== undefined) {
-            queryParameters = queryParameters.set('page_number', <any>pageNumber);
-        }
-        if (pageSize !== undefined) {
-            queryParameters = queryParameters.set('page_size', <any>pageSize);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-
-        return this.httpClient.get<InlineResponse2005>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/layers/`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Create a new layer.
      * Create a new layer in a space.
      * @param accountId 
@@ -331,18 +71,18 @@ export class LayersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public layersListLayers_3(accountId: string, spaceId: string, body: CreateLayerDoc, sourceLayerId?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public layersListLayers_3(accountId: string, spaceId: string, body: CreateLayerDoc, sourceLayerId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public layersListLayers_3(accountId: string, spaceId: string, body: CreateLayerDoc, sourceLayerId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public layersListLayers_3(accountId: string, spaceId: string, body: CreateLayerDoc, sourceLayerId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createLayer(accountId: string, spaceId: string, body: CreateLayerDoc, sourceLayerId?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public createLayer(accountId: string, spaceId: string, body: CreateLayerDoc, sourceLayerId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public createLayer(accountId: string, spaceId: string, body: CreateLayerDoc, sourceLayerId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public createLayer(accountId: string, spaceId: string, body: CreateLayerDoc, sourceLayerId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling layersListLayers_3.');
+            throw new Error('Required parameter accountId was null or undefined when calling createLayer.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling layersListLayers_3.');
+            throw new Error('Required parameter spaceId was null or undefined when calling createLayer.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling layersListLayers_3.');
+            throw new Error('Required parameter body was null or undefined when calling createLayer.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -404,21 +144,21 @@ export class LayersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public layersUpdateLayer(accountId: string, spaceId: string, layerId: string, datasetId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public layersUpdateLayer(accountId: string, spaceId: string, layerId: string, datasetId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public layersUpdateLayer(accountId: string, spaceId: string, layerId: string, datasetId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public layersUpdateLayer(accountId: string, spaceId: string, layerId: string, datasetId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteMapingFromLayer(accountId: string, spaceId: string, layerId: string, datasetId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public deleteMapingFromLayer(accountId: string, spaceId: string, layerId: string, datasetId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public deleteMapingFromLayer(accountId: string, spaceId: string, layerId: string, datasetId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public deleteMapingFromLayer(accountId: string, spaceId: string, layerId: string, datasetId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling layersUpdateLayer.');
+            throw new Error('Required parameter accountId was null or undefined when calling deleteMapingFromLayer.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling layersUpdateLayer.');
+            throw new Error('Required parameter spaceId was null or undefined when calling deleteMapingFromLayer.');
         }
         if (layerId === null || layerId === undefined) {
-            throw new Error('Required parameter layerId was null or undefined when calling layersUpdateLayer.');
+            throw new Error('Required parameter layerId was null or undefined when calling deleteMapingFromLayer.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling layersUpdateLayer.');
+            throw new Error('Required parameter datasetId was null or undefined when calling deleteMapingFromLayer.');
         }
 
         let headers = this.defaultHeaders;
@@ -460,6 +200,266 @@ export class LayersService {
     }
 
     /**
+     * Delete a layer in a space.
+     * 
+     * @param accountId 
+     * @param spaceId 
+     * @param layerId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteSingleLayerOfSpace(accountId: string, spaceId: string, layerId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public deleteSingleLayerOfSpace(accountId: string, spaceId: string, layerId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public deleteSingleLayerOfSpace(accountId: string, spaceId: string, layerId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public deleteSingleLayerOfSpace(accountId: string, spaceId: string, layerId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling deleteSingleLayerOfSpace.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling deleteSingleLayerOfSpace.');
+        }
+        if (layerId === null || layerId === undefined) {
+            throw new Error('Required parameter layerId was null or undefined when calling deleteSingleLayerOfSpace.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.delete<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/layers/${encodeURIComponent(String(layerId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get a layer
+     * 
+     * @param accountId 
+     * @param spaceId 
+     * @param layerId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getLayer(accountId: string, spaceId: string, layerId: string, observe?: 'body', reportProgress?: boolean): Observable<LayerDoc>;
+    public getLayer(accountId: string, spaceId: string, layerId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<LayerDoc>>;
+    public getLayer(accountId: string, spaceId: string, layerId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<LayerDoc>>;
+    public getLayer(accountId: string, spaceId: string, layerId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling getLayer.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling getLayer.');
+        }
+        if (layerId === null || layerId === undefined) {
+            throw new Error('Required parameter layerId was null or undefined when calling getLayer.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.get<LayerDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/layers/${encodeURIComponent(String(layerId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * List the layers
+     * Get a list of all layers in a space.
+     * @param accountId 
+     * @param spaceId 
+     * @param pageNumber The page number to get
+     * @param pageSize The number of items to return
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listLayers(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2005>;
+    public listLayers(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2005>>;
+    public listLayers(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2005>>;
+    public listLayers(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling listLayers.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling listLayers.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (pageNumber !== undefined) {
+            queryParameters = queryParameters.set('page_number', <any>pageNumber);
+        }
+        if (pageSize !== undefined) {
+            queryParameters = queryParameters.set('page_size', <any>pageSize);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.get<InlineResponse2005>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/layers/`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update a layer.
+     * Update a layer in a space.
+     * @param accountId 
+     * @param spaceId 
+     * @param layerId 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateLayer(accountId: string, spaceId: string, layerId: string, body: UpdateLayerDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public updateLayer(accountId: string, spaceId: string, layerId: string, body: UpdateLayerDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public updateLayer(accountId: string, spaceId: string, layerId: string, body: UpdateLayerDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public updateLayer(accountId: string, spaceId: string, layerId: string, body: UpdateLayerDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling updateLayer.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling updateLayer.');
+        }
+        if (layerId === null || layerId === undefined) {
+            throw new Error('Required parameter layerId was null or undefined when calling updateLayer.');
+        }
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling updateLayer.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/layers/${encodeURIComponent(String(layerId))}`,
+            body,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Update a layer mapping.
      * Update a mapping on a layer.
      * @param accountId 
@@ -470,24 +470,24 @@ export class LayersService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public layersUpdateLayer_4(accountId: string, spaceId: string, layerId: string, datasetId: string, body: UpdateLayerMappingDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public layersUpdateLayer_4(accountId: string, spaceId: string, layerId: string, datasetId: string, body: UpdateLayerMappingDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public layersUpdateLayer_4(accountId: string, spaceId: string, layerId: string, datasetId: string, body: UpdateLayerMappingDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public layersUpdateLayer_4(accountId: string, spaceId: string, layerId: string, datasetId: string, body: UpdateLayerMappingDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateLayerMapping(accountId: string, spaceId: string, layerId: string, datasetId: string, body: UpdateLayerMappingDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public updateLayerMapping(accountId: string, spaceId: string, layerId: string, datasetId: string, body: UpdateLayerMappingDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public updateLayerMapping(accountId: string, spaceId: string, layerId: string, datasetId: string, body: UpdateLayerMappingDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public updateLayerMapping(accountId: string, spaceId: string, layerId: string, datasetId: string, body: UpdateLayerMappingDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling layersUpdateLayer_4.');
+            throw new Error('Required parameter accountId was null or undefined when calling updateLayerMapping.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling layersUpdateLayer_4.');
+            throw new Error('Required parameter spaceId was null or undefined when calling updateLayerMapping.');
         }
         if (layerId === null || layerId === undefined) {
-            throw new Error('Required parameter layerId was null or undefined when calling layersUpdateLayer_4.');
+            throw new Error('Required parameter layerId was null or undefined when calling updateLayerMapping.');
         }
         if (datasetId === null || datasetId === undefined) {
-            throw new Error('Required parameter datasetId was null or undefined when calling layersUpdateLayer_4.');
+            throw new Error('Required parameter datasetId was null or undefined when calling updateLayerMapping.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling layersUpdateLayer_4.');
+            throw new Error('Required parameter body was null or undefined when calling updateLayerMapping.');
         }
 
         let headers = this.defaultHeaders;
