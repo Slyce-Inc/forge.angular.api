@@ -60,78 +60,18 @@ export class AccountsService {
 
 
     /**
-     * List the accounts
-     * Get a list of all accounts in the system.
-     * @param pageNumber The page number to get
-     * @param pageSize The number of items to return
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public accountsCreateAccount(pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse200>;
-    public accountsCreateAccount(pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse200>>;
-    public accountsCreateAccount(pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse200>>;
-    public accountsCreateAccount(pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (pageNumber !== undefined) {
-            queryParameters = queryParameters.set('page_number', <any>pageNumber);
-        }
-        if (pageSize !== undefined) {
-            queryParameters = queryParameters.set('page_size', <any>pageSize);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-
-        return this.httpClient.get<InlineResponse200>(`${this.basePath}/accounts/`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Create a new account
      * Create a new account.
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public accountsCreateAccount_1(body: NewAccountDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public accountsCreateAccount_1(body: NewAccountDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public accountsCreateAccount_1(body: NewAccountDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public accountsCreateAccount_1(body: NewAccountDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createAccount(body: NewAccountDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public createAccount(body: NewAccountDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public createAccount(body: NewAccountDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public createAccount(body: NewAccountDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling accountsCreateAccount_1.');
+            throw new Error('Required parameter body was null or undefined when calling createAccount.');
         }
 
         let headers = this.defaultHeaders;
@@ -184,12 +124,12 @@ export class AccountsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public accountsUpdateAccount(accountId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public accountsUpdateAccount(accountId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public accountsUpdateAccount(accountId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public accountsUpdateAccount(accountId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAccount(accountId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getAccount(accountId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getAccount(accountId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getAccount(accountId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling accountsUpdateAccount.');
+            throw new Error('Required parameter accountId was null or undefined when calling getAccount.');
         }
 
         let headers = this.defaultHeaders;
@@ -231,6 +171,66 @@ export class AccountsService {
     }
 
     /**
+     * List the accounts
+     * Get a list of all accounts in the system.
+     * @param pageNumber The page number to get
+     * @param pageSize The number of items to return
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listAccounts(pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse200>;
+    public listAccounts(pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse200>>;
+    public listAccounts(pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse200>>;
+    public listAccounts(pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (pageNumber !== undefined) {
+            queryParameters = queryParameters.set('page_number', <any>pageNumber);
+        }
+        if (pageSize !== undefined) {
+            queryParameters = queryParameters.set('page_size', <any>pageSize);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+
+        return this.httpClient.get<InlineResponse200>(`${this.basePath}/accounts/`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Update an account
      * Update an existing account.
      * @param accountId 
@@ -238,15 +238,15 @@ export class AccountsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public accountsUpdateAccount_2(accountId: string, body: UpdateAccountDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public accountsUpdateAccount_2(accountId: string, body: UpdateAccountDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public accountsUpdateAccount_2(accountId: string, body: UpdateAccountDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public accountsUpdateAccount_2(accountId: string, body: UpdateAccountDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateAccount(accountId: string, body: UpdateAccountDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public updateAccount(accountId: string, body: UpdateAccountDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public updateAccount(accountId: string, body: UpdateAccountDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public updateAccount(accountId: string, body: UpdateAccountDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling accountsUpdateAccount_2.');
+            throw new Error('Required parameter accountId was null or undefined when calling updateAccount.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling accountsUpdateAccount_2.');
+            throw new Error('Required parameter body was null or undefined when calling updateAccount.');
         }
 
         let headers = this.defaultHeaders;

@@ -65,15 +65,15 @@ export class NotificationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public notificationsNotification(accountId: string, jobId: string, body?: TagFoundDoc, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public notificationsNotification(accountId: string, jobId: string, body?: TagFoundDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public notificationsNotification(accountId: string, jobId: string, body?: TagFoundDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public notificationsNotification(accountId: string, jobId: string, body?: TagFoundDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public notification(accountId: string, jobId: string, body?: TagFoundDoc, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public notification(accountId: string, jobId: string, body?: TagFoundDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public notification(accountId: string, jobId: string, body?: TagFoundDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public notification(accountId: string, jobId: string, body?: TagFoundDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling notificationsNotification.');
+            throw new Error('Required parameter accountId was null or undefined when calling notification.');
         }
         if (jobId === null || jobId === undefined) {
-            throw new Error('Required parameter jobId was null or undefined when calling notificationsNotification.');
+            throw new Error('Required parameter jobId was null or undefined when calling notification.');
         }
 
         let headers = this.defaultHeaders;

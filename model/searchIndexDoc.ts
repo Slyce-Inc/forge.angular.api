@@ -9,21 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20015Items } from './inlineResponse20015Items';
 
 
-export interface InlineResponse20018 {
+export interface SearchIndexDoc {
+    accountId?: string;
+    datasetId?: string;
+    languageCode?: string;
+    countryCode?: string;
+    limit?: number;
     /**
-     * The response type
+     * null
      */
-    type?: string;
-    items?: Array<InlineResponse20015Items>;
-    /**
-     * The total number of items available
-     */
-    totalItems?: number;
-    /**
-     * The cursor for paging the items
-     */
-    cursor?: string;
+    query?: Array<string>;
 }

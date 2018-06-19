@@ -63,12 +63,12 @@ export class SDKService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sDKGetSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public sDKGetSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public sDKGetSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public sDKGetSdkConfigWithApiKey(accountId: string, spaceId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getSdkConfigWithApiKey(accountId: string, spaceId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getSdkConfigWithApiKey(accountId: string, spaceId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling sDKGetSdkConfigWithApiKey.');
+            throw new Error('Required parameter accountId was null or undefined when calling getSdkConfigWithApiKey.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -123,15 +123,15 @@ export class SDKService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sDKGetSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public sDKGetSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public sDKGetSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public sDKGetSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getSdkConfigWithExplicitSpace(accountId: string, spaceId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling sDKGetSdkConfigWithExplicitSpace.');
+            throw new Error('Required parameter accountId was null or undefined when calling getSdkConfigWithExplicitSpace.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling sDKGetSdkConfigWithExplicitSpace.');
+            throw new Error('Required parameter spaceId was null or undefined when calling getSdkConfigWithExplicitSpace.');
         }
 
         let headers = this.defaultHeaders;

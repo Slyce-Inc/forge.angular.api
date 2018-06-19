@@ -9,21 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse20015Items } from './inlineResponse20015Items';
+import { FindSimilarSettings } from './findSimilarSettings';
 
 
-export interface InlineResponse20018 {
+export interface FindSimilarConsumes {
     /**
-     * The response type
+     * Used to toggle demo mode
      */
-    type?: string;
-    items?: Array<InlineResponse20015Items>;
-    /**
-     * The total number of items available
-     */
-    totalItems?: number;
-    /**
-     * The cursor for paging the items
-     */
-    cursor?: string;
+    demoMode?: boolean;
+    settings?: FindSimilarSettings;
 }

@@ -63,15 +63,15 @@ export class ImagesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public imagesGetUgcImage(accountId: string, imageId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public imagesGetUgcImage(accountId: string, imageId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public imagesGetUgcImage(accountId: string, imageId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public imagesGetUgcImage(accountId: string, imageId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getUgcImage(accountId: string, imageId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getUgcImage(accountId: string, imageId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getUgcImage(accountId: string, imageId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getUgcImage(accountId: string, imageId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling imagesGetUgcImage.');
+            throw new Error('Required parameter accountId was null or undefined when calling getUgcImage.');
         }
         if (imageId === null || imageId === undefined) {
-            throw new Error('Required parameter imageId was null or undefined when calling imagesGetUgcImage.');
+            throw new Error('Required parameter imageId was null or undefined when calling getUgcImage.');
         }
 
         let headers = this.defaultHeaders;
@@ -121,18 +121,18 @@ export class ImagesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public imagesGetUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public imagesGetUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public imagesGetUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public imagesGetUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getUgcImageWithFingerprint(accountId: string, fingerprint: string, imageId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling imagesGetUgcImageWithFingerprint.');
+            throw new Error('Required parameter accountId was null or undefined when calling getUgcImageWithFingerprint.');
         }
         if (fingerprint === null || fingerprint === undefined) {
-            throw new Error('Required parameter fingerprint was null or undefined when calling imagesGetUgcImageWithFingerprint.');
+            throw new Error('Required parameter fingerprint was null or undefined when calling getUgcImageWithFingerprint.');
         }
         if (imageId === null || imageId === undefined) {
-            throw new Error('Required parameter imageId was null or undefined when calling imagesGetUgcImageWithFingerprint.');
+            throw new Error('Required parameter imageId was null or undefined when calling getUgcImageWithFingerprint.');
         }
 
         let headers = this.defaultHeaders;

@@ -20,7 +20,7 @@ import { Observable }                                        from 'rxjs/Observab
 
 import { CreateWorkflowDoc } from '../model/createWorkflowDoc';
 import { ExecuteWorkflowDoc } from '../model/executeWorkflowDoc';
-import { InlineResponse20018 } from '../model/inlineResponse20018';
+import { InlineResponse20019 } from '../model/inlineResponse20019';
 import { NewJobDoc } from '../model/newJobDoc';
 import { UpdateWorkflowDoc } from '../model/updateWorkflowDoc';
 import { WorkflowDoc } from '../model/workflowDoc';
@@ -62,7 +62,80 @@ export class WorkflowsService {
 
 
     /**
-     * Get a workflow
+     * Create a new workflow.
+     * Create a new workflow using Operations and Operators to build out the execution. To copy a workflow add source_workflow_id to the query string and only pass the workflow_name in the body.
+     * @param accountId 
+     * @param spaceId 
+     * @param body 
+     * @param sourceWorkflowId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createWorkflow(accountId: string, spaceId: string, body: CreateWorkflowDoc, sourceWorkflowId?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public createWorkflow(accountId: string, spaceId: string, body: CreateWorkflowDoc, sourceWorkflowId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public createWorkflow(accountId: string, spaceId: string, body: CreateWorkflowDoc, sourceWorkflowId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public createWorkflow(accountId: string, spaceId: string, body: CreateWorkflowDoc, sourceWorkflowId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling createWorkflow.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling createWorkflow.');
+        }
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling createWorkflow.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (sourceWorkflowId !== undefined) {
+            queryParameters = queryParameters.set('source_workflow_id', <any>sourceWorkflowId);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/`,
+            body,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Delete a workflow.
      * 
      * @param accountId 
      * @param spaceId 
@@ -70,18 +143,18 @@ export class WorkflowsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public workflowsGetWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'body', reportProgress?: boolean): Observable<WorkflowDoc>;
-    public workflowsGetWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<WorkflowDoc>>;
-    public workflowsGetWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<WorkflowDoc>>;
-    public workflowsGetWorkflow(accountId: string, spaceId: string, workflowId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public deleteWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public deleteWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public deleteWorkflow(accountId: string, spaceId: string, workflowId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling workflowsGetWorkflow.');
+            throw new Error('Required parameter accountId was null or undefined when calling deleteWorkflow.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling workflowsGetWorkflow.');
+            throw new Error('Required parameter spaceId was null or undefined when calling deleteWorkflow.');
         }
         if (workflowId === null || workflowId === undefined) {
-            throw new Error('Required parameter workflowId was null or undefined when calling workflowsGetWorkflow.');
+            throw new Error('Required parameter workflowId was null or undefined when calling deleteWorkflow.');
         }
 
         let headers = this.defaultHeaders;
@@ -112,7 +185,7 @@ export class WorkflowsService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<WorkflowDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/${encodeURIComponent(String(workflowId))}`,
+        return this.httpClient.delete<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/${encodeURIComponent(String(workflowId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -132,21 +205,21 @@ export class WorkflowsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public workflowsGetWorkflow_1(accountId: string, spaceId: string, workflowId: string, body: ExecuteWorkflowDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public workflowsGetWorkflow_1(accountId: string, spaceId: string, workflowId: string, body: ExecuteWorkflowDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public workflowsGetWorkflow_1(accountId: string, spaceId: string, workflowId: string, body: ExecuteWorkflowDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public workflowsGetWorkflow_1(accountId: string, spaceId: string, workflowId: string, body: ExecuteWorkflowDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public executeWorkflow(accountId: string, spaceId: string, workflowId: string, body: ExecuteWorkflowDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public executeWorkflow(accountId: string, spaceId: string, workflowId: string, body: ExecuteWorkflowDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public executeWorkflow(accountId: string, spaceId: string, workflowId: string, body: ExecuteWorkflowDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public executeWorkflow(accountId: string, spaceId: string, workflowId: string, body: ExecuteWorkflowDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling workflowsGetWorkflow_1.');
+            throw new Error('Required parameter accountId was null or undefined when calling executeWorkflow.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling workflowsGetWorkflow_1.');
+            throw new Error('Required parameter spaceId was null or undefined when calling executeWorkflow.');
         }
         if (workflowId === null || workflowId === undefined) {
-            throw new Error('Required parameter workflowId was null or undefined when calling workflowsGetWorkflow_1.');
+            throw new Error('Required parameter workflowId was null or undefined when calling executeWorkflow.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling workflowsGetWorkflow_1.');
+            throw new Error('Required parameter body was null or undefined when calling executeWorkflow.');
         }
 
         let headers = this.defaultHeaders;
@@ -193,7 +266,7 @@ export class WorkflowsService {
     }
 
     /**
-     * Delete a workflow.
+     * Get a workflow
      * 
      * @param accountId 
      * @param spaceId 
@@ -201,18 +274,18 @@ export class WorkflowsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public workflowsGetWorkflow_2(accountId: string, spaceId: string, workflowId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public workflowsGetWorkflow_2(accountId: string, spaceId: string, workflowId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public workflowsGetWorkflow_2(accountId: string, spaceId: string, workflowId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public workflowsGetWorkflow_2(accountId: string, spaceId: string, workflowId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'body', reportProgress?: boolean): Observable<WorkflowDoc>;
+    public getWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<WorkflowDoc>>;
+    public getWorkflow(accountId: string, spaceId: string, workflowId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<WorkflowDoc>>;
+    public getWorkflow(accountId: string, spaceId: string, workflowId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling workflowsGetWorkflow_2.');
+            throw new Error('Required parameter accountId was null or undefined when calling getWorkflow.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling workflowsGetWorkflow_2.');
+            throw new Error('Required parameter spaceId was null or undefined when calling getWorkflow.');
         }
         if (workflowId === null || workflowId === undefined) {
-            throw new Error('Required parameter workflowId was null or undefined when calling workflowsGetWorkflow_2.');
+            throw new Error('Required parameter workflowId was null or undefined when calling getWorkflow.');
         }
 
         let headers = this.defaultHeaders;
@@ -243,77 +316,7 @@ export class WorkflowsService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.delete<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/${encodeURIComponent(String(workflowId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Update a workflow.
-     * Update a new workflow using Operations and Operators to build out the execution.
-     * @param accountId 
-     * @param spaceId 
-     * @param workflowId 
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public workflowsGetWorkflow_3(accountId: string, spaceId: string, workflowId: string, body: UpdateWorkflowDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public workflowsGetWorkflow_3(accountId: string, spaceId: string, workflowId: string, body: UpdateWorkflowDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public workflowsGetWorkflow_3(accountId: string, spaceId: string, workflowId: string, body: UpdateWorkflowDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public workflowsGetWorkflow_3(accountId: string, spaceId: string, workflowId: string, body: UpdateWorkflowDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling workflowsGetWorkflow_3.');
-        }
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling workflowsGetWorkflow_3.');
-        }
-        if (workflowId === null || workflowId === undefined) {
-            throw new Error('Required parameter workflowId was null or undefined when calling workflowsGetWorkflow_3.');
-        }
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling workflowsGetWorkflow_3.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (slyce-account-id) required
-        if (this.configuration.apiKeys["slyce-account-id"]) {
-            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
-        }
-
-        // authentication (slyce-api-key) required
-        if (this.configuration.apiKeys["slyce-api-key"]) {
-            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json',
-            'multipart/form-data'
-        ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
-        }
-
-        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/${encodeURIComponent(String(workflowId))}`,
-            body,
+        return this.httpClient.get<WorkflowDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/${encodeURIComponent(String(workflowId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -333,15 +336,15 @@ export class WorkflowsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20018>;
-    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20018>>;
-    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20018>>;
-    public workflowsListWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20019>;
+    public listWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20019>>;
+    public listWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20019>>;
+    public listWorkflows(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling workflowsListWorkflows.');
+            throw new Error('Required parameter accountId was null or undefined when calling listWorkflows.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling workflowsListWorkflows.');
+            throw new Error('Required parameter spaceId was null or undefined when calling listWorkflows.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -380,7 +383,7 @@ export class WorkflowsService {
             'multipart/form-data'
         ];
 
-        return this.httpClient.get<InlineResponse20018>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/`,
+        return this.httpClient.get<InlineResponse20019>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -392,32 +395,30 @@ export class WorkflowsService {
     }
 
     /**
-     * Create a new workflow.
-     * Create a new workflow using Operations and Operators to build out the execution. To copy a workflow add source_workflow_id to the query string and only pass the workflow_name in the body.
+     * Update a workflow.
+     * Update a new workflow using Operations and Operators to build out the execution.
      * @param accountId 
      * @param spaceId 
+     * @param workflowId 
      * @param body 
-     * @param sourceWorkflowId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public workflowsListWorkflows_4(accountId: string, spaceId: string, body: CreateWorkflowDoc, sourceWorkflowId?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public workflowsListWorkflows_4(accountId: string, spaceId: string, body: CreateWorkflowDoc, sourceWorkflowId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public workflowsListWorkflows_4(accountId: string, spaceId: string, body: CreateWorkflowDoc, sourceWorkflowId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public workflowsListWorkflows_4(accountId: string, spaceId: string, body: CreateWorkflowDoc, sourceWorkflowId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateWorkflow(accountId: string, spaceId: string, workflowId: string, body: UpdateWorkflowDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public updateWorkflow(accountId: string, spaceId: string, workflowId: string, body: UpdateWorkflowDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public updateWorkflow(accountId: string, spaceId: string, workflowId: string, body: UpdateWorkflowDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public updateWorkflow(accountId: string, spaceId: string, workflowId: string, body: UpdateWorkflowDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling workflowsListWorkflows_4.');
+            throw new Error('Required parameter accountId was null or undefined when calling updateWorkflow.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling workflowsListWorkflows_4.');
+            throw new Error('Required parameter spaceId was null or undefined when calling updateWorkflow.');
+        }
+        if (workflowId === null || workflowId === undefined) {
+            throw new Error('Required parameter workflowId was null or undefined when calling updateWorkflow.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling workflowsListWorkflows_4.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (sourceWorkflowId !== undefined) {
-            queryParameters = queryParameters.set('source_workflow_id', <any>sourceWorkflowId);
+            throw new Error('Required parameter body was null or undefined when calling updateWorkflow.');
         }
 
         let headers = this.defaultHeaders;
@@ -452,10 +453,9 @@ export class WorkflowsService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/`,
+        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/workflows/${encodeURIComponent(String(workflowId))}`,
             body,
             {
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

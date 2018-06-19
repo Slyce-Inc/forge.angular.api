@@ -22,6 +22,7 @@ import { BaseClassifierConsumes } from '../model/baseClassifierConsumes';
 import { BaseDetectorConsumes } from '../model/baseDetectorConsumes';
 import { BaseSearchConsumes } from '../model/baseSearchConsumes';
 import { DetectReferenceImagesConsumes } from '../model/detectReferenceImagesConsumes';
+import { FindSimilarConsumes } from '../model/findSimilarConsumes';
 import { InlineResponse20010 } from '../model/inlineResponse20010';
 import { InlineResponse20011 } from '../model/inlineResponse20011';
 import { InlineResponse20012 } from '../model/inlineResponse20012';
@@ -30,6 +31,7 @@ import { InlineResponse20014 } from '../model/inlineResponse20014';
 import { InlineResponse20015 } from '../model/inlineResponse20015';
 import { InlineResponse20016 } from '../model/inlineResponse20016';
 import { InlineResponse20017 } from '../model/inlineResponse20017';
+import { InlineResponse20018 } from '../model/inlineResponse20018';
 import { InlineResponse2008 } from '../model/inlineResponse2008';
 import { InlineResponse2009 } from '../model/inlineResponse2009';
 import { VisualSearchConsumes } from '../model/visualSearchConsumes';
@@ -582,8 +584,81 @@ export class ServicesService {
     }
 
     /**
+     * Find Similar
+     * find similar with settings
+     * @param accountId 
+     * @param spaceId 
+     * @param body 
+     * @param limit 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public servicesFindSimilar(accountId: string, spaceId: string, body: FindSimilarConsumes, limit?: string, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse20018>;
+    public servicesFindSimilar(accountId: string, spaceId: string, body: FindSimilarConsumes, limit?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse20018>>;
+    public servicesFindSimilar(accountId: string, spaceId: string, body: FindSimilarConsumes, limit?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse20018>>;
+    public servicesFindSimilar(accountId: string, spaceId: string, body: FindSimilarConsumes, limit?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling servicesFindSimilar.');
+        }
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling servicesFindSimilar.');
+        }
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling servicesFindSimilar.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (limit !== undefined) {
+            queryParameters = queryParameters.set('limit', <any>limit);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (slyce-account-id) required
+        if (this.configuration.apiKeys["slyce-account-id"]) {
+            headers = headers.set('slyce-account-id', this.configuration.apiKeys["slyce-account-id"]);
+        }
+
+        // authentication (slyce-api-key) required
+        if (this.configuration.apiKeys["slyce-api-key"]) {
+            headers = headers.set('slyce-api-key', this.configuration.apiKeys["slyce-api-key"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json',
+            'multipart/form-data'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<InlineResponse20018>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/services/FindSimilar`,
+            body,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Text Search
-     * text Search with settings
+     * text search with settings
      * @param accountId 
      * @param spaceId 
      * @param body 
@@ -656,7 +731,7 @@ export class ServicesService {
 
     /**
      * Visual Search
-     * visual Search with settings
+     * visual search with settings
      * @param accountId 
      * @param spaceId 
      * @param body 
@@ -729,7 +804,7 @@ export class ServicesService {
 
     /**
      * Voyager Search
-     * voyager Search with settings
+     * voyager search with settings
      * @param accountId 
      * @param spaceId 
      * @param body 

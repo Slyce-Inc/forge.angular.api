@@ -61,26 +61,32 @@ export class LensesService {
 
 
     /**
-     * Get a lens
-     * 
+     * Create a new lens.
+     * Create a new lens. To copy a lens add source_lens_id to the query string and only pass the lens_name in the body.
      * @param accountId 
      * @param spaceId 
-     * @param lensId 
+     * @param body 
+     * @param sourceLensId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public lensesGetLens(accountId: string, spaceId: string, lensId: string, observe?: 'body', reportProgress?: boolean): Observable<LensDoc>;
-    public lensesGetLens(accountId: string, spaceId: string, lensId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<LensDoc>>;
-    public lensesGetLens(accountId: string, spaceId: string, lensId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<LensDoc>>;
-    public lensesGetLens(accountId: string, spaceId: string, lensId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createLens(accountId: string, spaceId: string, body: CreateLensDoc, sourceLensId?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public createLens(accountId: string, spaceId: string, body: CreateLensDoc, sourceLensId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public createLens(accountId: string, spaceId: string, body: CreateLensDoc, sourceLensId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public createLens(accountId: string, spaceId: string, body: CreateLensDoc, sourceLensId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling lensesGetLens.');
+            throw new Error('Required parameter accountId was null or undefined when calling createLens.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling lensesGetLens.');
+            throw new Error('Required parameter spaceId was null or undefined when calling createLens.');
         }
-        if (lensId === null || lensId === undefined) {
-            throw new Error('Required parameter lensId was null or undefined when calling lensesGetLens.');
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling createLens.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (sourceLensId !== undefined) {
+            queryParameters = queryParameters.set('source_lens_id', <any>sourceLensId);
         }
 
         let headers = this.defaultHeaders;
@@ -110,9 +116,15 @@ export class LensesService {
             'application/json',
             'multipart/form-data'
         ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
 
-        return this.httpClient.get<LensDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/lenses/${encodeURIComponent(String(lensId))}`,
+        return this.httpClient.post<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/lenses/`,
+            body,
             {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -130,18 +142,18 @@ export class LensesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public lensesGetLens_1(accountId: string, spaceId: string, lensId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public lensesGetLens_1(accountId: string, spaceId: string, lensId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public lensesGetLens_1(accountId: string, spaceId: string, lensId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public lensesGetLens_1(accountId: string, spaceId: string, lensId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteLens(accountId: string, spaceId: string, lensId: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public deleteLens(accountId: string, spaceId: string, lensId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public deleteLens(accountId: string, spaceId: string, lensId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public deleteLens(accountId: string, spaceId: string, lensId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling lensesGetLens_1.');
+            throw new Error('Required parameter accountId was null or undefined when calling deleteLens.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling lensesGetLens_1.');
+            throw new Error('Required parameter spaceId was null or undefined when calling deleteLens.');
         }
         if (lensId === null || lensId === undefined) {
-            throw new Error('Required parameter lensId was null or undefined when calling lensesGetLens_1.');
+            throw new Error('Required parameter lensId was null or undefined when calling deleteLens.');
         }
 
         let headers = this.defaultHeaders;
@@ -183,30 +195,26 @@ export class LensesService {
     }
 
     /**
-     * Update a lens.
-     * Update a lens.
+     * Get a lens
+     * 
      * @param accountId 
      * @param spaceId 
      * @param lensId 
-     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public lensesGetLens_2(accountId: string, spaceId: string, lensId: string, body: UpdateLensDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public lensesGetLens_2(accountId: string, spaceId: string, lensId: string, body: UpdateLensDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public lensesGetLens_2(accountId: string, spaceId: string, lensId: string, body: UpdateLensDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public lensesGetLens_2(accountId: string, spaceId: string, lensId: string, body: UpdateLensDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getLens(accountId: string, spaceId: string, lensId: string, observe?: 'body', reportProgress?: boolean): Observable<LensDoc>;
+    public getLens(accountId: string, spaceId: string, lensId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<LensDoc>>;
+    public getLens(accountId: string, spaceId: string, lensId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<LensDoc>>;
+    public getLens(accountId: string, spaceId: string, lensId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling lensesGetLens_2.');
+            throw new Error('Required parameter accountId was null or undefined when calling getLens.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling lensesGetLens_2.');
+            throw new Error('Required parameter spaceId was null or undefined when calling getLens.');
         }
         if (lensId === null || lensId === undefined) {
-            throw new Error('Required parameter lensId was null or undefined when calling lensesGetLens_2.');
-        }
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling lensesGetLens_2.');
+            throw new Error('Required parameter lensId was null or undefined when calling getLens.');
         }
 
         let headers = this.defaultHeaders;
@@ -236,13 +244,8 @@ export class LensesService {
             'application/json',
             'multipart/form-data'
         ];
-        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
-        }
 
-        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/lenses/${encodeURIComponent(String(lensId))}`,
-            body,
+        return this.httpClient.get<LensDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/lenses/${encodeURIComponent(String(lensId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -262,15 +265,15 @@ export class LensesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2006>;
-    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2006>>;
-    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2006>>;
-    public lensesListLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean): Observable<InlineResponse2006>;
+    public listLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InlineResponse2006>>;
+    public listLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InlineResponse2006>>;
+    public listLenses(accountId: string, spaceId: string, pageNumber?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling lensesListLenses.');
+            throw new Error('Required parameter accountId was null or undefined when calling listLenses.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling lensesListLenses.');
+            throw new Error('Required parameter spaceId was null or undefined when calling listLenses.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -321,32 +324,30 @@ export class LensesService {
     }
 
     /**
-     * Create a new lens.
-     * Create a new lens. To copy a lens add source_lens_id to the query string and only pass the lens_name in the body.
+     * Update a lens.
+     * Update a lens.
      * @param accountId 
      * @param spaceId 
+     * @param lensId 
      * @param body 
-     * @param sourceLensId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public lensesListLenses_3(accountId: string, spaceId: string, body: CreateLensDoc, sourceLensId?: string, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
-    public lensesListLenses_3(accountId: string, spaceId: string, body: CreateLensDoc, sourceLensId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
-    public lensesListLenses_3(accountId: string, spaceId: string, body: CreateLensDoc, sourceLensId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
-    public lensesListLenses_3(accountId: string, spaceId: string, body: CreateLensDoc, sourceLensId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateLens(accountId: string, spaceId: string, lensId: string, body: UpdateLensDoc, observe?: 'body', reportProgress?: boolean): Observable<NewJobDoc>;
+    public updateLens(accountId: string, spaceId: string, lensId: string, body: UpdateLensDoc, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewJobDoc>>;
+    public updateLens(accountId: string, spaceId: string, lensId: string, body: UpdateLensDoc, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewJobDoc>>;
+    public updateLens(accountId: string, spaceId: string, lensId: string, body: UpdateLensDoc, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling lensesListLenses_3.');
+            throw new Error('Required parameter accountId was null or undefined when calling updateLens.');
         }
         if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling lensesListLenses_3.');
+            throw new Error('Required parameter spaceId was null or undefined when calling updateLens.');
+        }
+        if (lensId === null || lensId === undefined) {
+            throw new Error('Required parameter lensId was null or undefined when calling updateLens.');
         }
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling lensesListLenses_3.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (sourceLensId !== undefined) {
-            queryParameters = queryParameters.set('source_lens_id', <any>sourceLensId);
+            throw new Error('Required parameter body was null or undefined when calling updateLens.');
         }
 
         let headers = this.defaultHeaders;
@@ -381,10 +382,9 @@ export class LensesService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/lenses/`,
+        return this.httpClient.patch<NewJobDoc>(`${this.basePath}/accounts/${encodeURIComponent(String(accountId))}/spaces/${encodeURIComponent(String(spaceId))}/lenses/${encodeURIComponent(String(lensId))}`,
             body,
             {
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

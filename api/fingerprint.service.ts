@@ -63,15 +63,15 @@ export class FingerprintService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public fingerprintRemoveUgcImagesByFingerprint(accountId: string, fingerprint: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public fingerprintRemoveUgcImagesByFingerprint(accountId: string, fingerprint: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public fingerprintRemoveUgcImagesByFingerprint(accountId: string, fingerprint: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public fingerprintRemoveUgcImagesByFingerprint(accountId: string, fingerprint: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public removeUgcImagesByFingerprint(accountId: string, fingerprint: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public removeUgcImagesByFingerprint(accountId: string, fingerprint: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public removeUgcImagesByFingerprint(accountId: string, fingerprint: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public removeUgcImagesByFingerprint(accountId: string, fingerprint: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling fingerprintRemoveUgcImagesByFingerprint.');
+            throw new Error('Required parameter accountId was null or undefined when calling removeUgcImagesByFingerprint.');
         }
         if (fingerprint === null || fingerprint === undefined) {
-            throw new Error('Required parameter fingerprint was null or undefined when calling fingerprintRemoveUgcImagesByFingerprint.');
+            throw new Error('Required parameter fingerprint was null or undefined when calling removeUgcImagesByFingerprint.');
         }
 
         let headers = this.defaultHeaders;

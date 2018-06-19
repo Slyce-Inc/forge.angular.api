@@ -63,15 +63,15 @@ export class SearchResultsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public searchResultsGetSearchResult(accountId: string, searchResultId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public searchResultsGetSearchResult(accountId: string, searchResultId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public searchResultsGetSearchResult(accountId: string, searchResultId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public searchResultsGetSearchResult(accountId: string, searchResultId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getSearchResult(accountId: string, searchResultId: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getSearchResult(accountId: string, searchResultId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getSearchResult(accountId: string, searchResultId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getSearchResult(accountId: string, searchResultId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling searchResultsGetSearchResult.');
+            throw new Error('Required parameter accountId was null or undefined when calling getSearchResult.');
         }
         if (searchResultId === null || searchResultId === undefined) {
-            throw new Error('Required parameter searchResultId was null or undefined when calling searchResultsGetSearchResult.');
+            throw new Error('Required parameter searchResultId was null or undefined when calling getSearchResult.');
         }
 
         let headers = this.defaultHeaders;
